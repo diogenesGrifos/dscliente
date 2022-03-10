@@ -26,7 +26,10 @@ public class Client implements Serializable{
 	
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant birthDate;
+	
 	private Integer children;
+	
+	
 	
 	
 	public Client() {
@@ -101,6 +104,9 @@ public class Client implements Serializable{
 	public void setChildren(Integer children) {
 		this.children = children;
 	}
+	
+
+
 
 
 	@Override

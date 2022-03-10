@@ -1,5 +1,9 @@
 package com.dscliente.dscliente.services;
 
+import java.util.Optional;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,5 +25,13 @@ public class ClientService {
 		Page<Client> list =  clientRepository.findAll(pageRequest);
 		
 		return list.map(x -> new ClientDTO(x));
+	}
+	
+	@Transactional(readOnly = true)
+	public ClientDTO findById(Long id) {
+		Optional<Client> obj = clientRepository.findById(id);
+		Client entity = obj.orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada"));
+		
+		return new ClientDTO(entity);
 	}
 }
